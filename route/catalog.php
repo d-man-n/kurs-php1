@@ -1,12 +1,8 @@
 <?php
 
-if (isset($_GET['id1'])) {
-
-}
-
-$catalog_id = getCatalogIdByAlias(isset($_GET['id1']) && $_GET['id1'] != "sale" && $_GET['id1'] != "new" ? $_GET['id1'] : "all");
-$new = (isset($_GET['id1']) && $_GET['id1'] == "new") || (isset($_GET['new']) && $_GET['new'] == 1) ? 1 : 0;
-$sale = (isset($_GET['id1']) && $_GET['id1'] == "sale") || (isset($_GET['sale']) && $_GET['sale'] == 1) ? 1 : 0;;
+$catalog_id = getCatalogIdByAlias(isset($uri[1]) && $uri[1] != "sale" && $uri[1] != "new" ? $uri[1] : "all");
+$new = (isset($uri[1]) && $uri[1] == "new") || (isset($_GET['new']) && $_GET['new'] == 1) ? 1 : 0;
+$sale = (isset($uri[1]) && $uri[1] == "sale") || (isset($_GET['sale']) && $_GET['sale'] == 1) ? 1 : 0;;
 $sort = isset($_GET['sort']) ? $_GET['sort'] : "price";
 $ascDesc = isset($_GET['ascdesc']) ? $_GET['ascdesc'] : "asc";
 $priceBegin = isset($_GET['min_price']) ? $_GET['min_price'] : getMinMaxPrice($catalog_id, $new, $sale)['min_price'];

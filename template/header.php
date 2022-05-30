@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-if (!isset($_GET['id'])) {
-  $_GET['id'] = "";
-}
+// if (!isset($_GET['id'])) {
+//   $_GET['id'] = "";
+// }
 
 if (!isset($_SESSION['id_user'])) {
   $_SESSION['id_user'] = 0;
@@ -42,7 +42,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/src/core.php');
     <img src="/img/logo.svg" alt="Fashion">
   </a>
   <nav class="page-header__menu">
-    <?=showMenu('sort', 'main-menu main-menu--header', 'main-menu__item', adminPage($_GET['id']) == 2 ? 2 : 0)?>
+    <?=showMenu('sort', 'main-menu main-menu--header', 'main-menu__item', adminPage($uri[0]) == 2 ? 2 : 0)?>
   </nav>
 </header>
 

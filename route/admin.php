@@ -1,5 +1,5 @@
 <?php
-if (isset($_GET['id1']) && $_GET['id1'] == 'exit') {
+if (isset($uri[1]) && $uri[1] == 'exit') {
     session_destroy();
     header("Location: /");
 } else if ($_SESSION['id_user'] == 0) {

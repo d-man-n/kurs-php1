@@ -11,15 +11,17 @@
 
 function showMenu($sort, $listClass, $linkClass, $admin) 
 {
+    global $uri;
+    
     $res = mysqli_query(connect(), "SELECT * from `menu` WHERE `admin` IN (1, " . $admin . ") ORDER BY `" . $sort . "`");
     ?>
         <ul class="<?=$listClass?>">
             <?php while ($row = mysqli_fetch_assoc($res)): ?>
             <?php 
-                if (isset($_GET['id1']) && isset(preg_split("/\//", $row['path'])[2]) && preg_split("/\//", $row['path'])[2] == $_GET['id1']) {
+                if (isset($uri[1]) && isset(preg_split("/\//", $row['path'])[2]) && preg_split("/\//", $row['path'])[2] == $uri[1]) {
                     $active = "active";
                 }
-                else if (!isset(preg_split("/\//", $row['path'])[3]) && preg_split("/\//", $row['path'])[1] == $_GET['id']) {
+                else if (!isset(preg_split("/\//", $row['path'])[3]) && preg_split("/\//", $row['path'])[1] == $uri[0]) {
                     $active = "active";
                 } else {
                     $active = "";

@@ -11,11 +11,11 @@ if (isset($_POST['add-product'])) {
   $products = getProducts();
 }
 
-if (isset($_GET['id1']) && $_GET['id1'] == 'add'): 
+if (isset($uri[1]) && $uri[1] == 'add'): 
 
-  if (isset($_GET['id2']) && $_GET['id2'] > 0) {
-    $product = getProductById($_GET['id2']);
-    $catalog = getCatalogByProductId($_GET['id2']);
+  if (isset($uri[2]) && $uri[2] > 0) {
+    $product = getProductById($uri[2]);
+    $catalog = getCatalogByProductId($uri[2]);
   }
 
 ?>
@@ -24,7 +24,7 @@ if (isset($_GET['id1']) && $_GET['id1'] == 'add'):
     <h1 class="h h--1"><?=isset($product) ? "Правка товара" : "Добавление товара"?></h1>
     <form class="custom-form" id="addForm" method="post" enctype="multipart/form-data">
       <?php if (isset($product)): ?>
-        <input type="hidden" name="product-id" id="product-id" value="<?=$_GET['id2']?>">
+        <input type="hidden" name="product-id" id="product-id" value="<?=$uri[2]?>">
       <?php endif; ?>
       <fieldset class="page-add__group custom-form__group">
         <legend class="page-add__small-title custom-form__title">Данные о товаре</legend>

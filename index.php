@@ -1,7 +1,10 @@
 <?php
+
+$uri = explode('/', trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'));
+
 require_once($_SERVER['DOCUMENT_ROOT'] . '/template/header.php');
 
-switch($_GET['id']) {
+switch($uri[0]) {
     case 'admin':
         include_once $_SERVER['DOCUMENT_ROOT'] . '/route/admin.php';
         break;
