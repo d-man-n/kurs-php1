@@ -6,14 +6,22 @@
  * @param string сортировка меню
  * @param string имя класса для элементов списка (отличается для разных типов меню)
  * @param string имя класса для ссылок (отличается для разных типов меню)
- * @param string признак меню админки или пользовательско части
+ * @param array признак меню админки или пользовательско части
  */
 
 function showMenu($sort, $listClass, $linkClass, $admin) 
 {
     global $uri;
+
+    if (in_array("Администраторы", $admin)) {
+        $admin_menu = "0,1,2";
+    } else if (in_array("Операторы", $admin)) {
+        $admin_menu = "0,1";
+    } else {
+        $admin_menu = "0";
+    }
     
-    $res = mysqli_query(connect(), "SELECT * from `menu` WHERE `admin` IN (1, " . $admin . ") ORDER BY `" . $sort . "`");
+    $res = mysqli_query(connect(), "SELECT * from `menu` WHERE `admin` IN (" . $admin_menu . ") ORDER BY `" . $sort . "`");
     ?>
         <ul class="<?=$listClass?>">
             <?php while ($row = mysqli_fetch_assoc($res)): ?>
@@ -38,5 +46,5 @@ function showMenu($sort, $listClass, $linkClass, $admin)
                 </li>
             <?php endif; ?>
         </ul>
-    <?php
+    <?php 
 }

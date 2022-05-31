@@ -1,10 +1,6 @@
 <?php
 session_start();
 
-// if (!isset($_GET['id'])) {
-//   $_GET['id'] = "";
-// }
-
 if (!isset($_SESSION['id_user'])) {
   $_SESSION['id_user'] = 0;
 }
@@ -38,11 +34,11 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/src/core.php');
 </head>
 <body>
 <header class="page-header">
-  <a class="page-header__logo" href="#">
+  <a class="page-header__logo" href="/">
     <img src="/img/logo.svg" alt="Fashion">
-  </a>
+  </a> 
   <nav class="page-header__menu">
-    <?=showMenu('sort', 'main-menu main-menu--header', 'main-menu__item', adminPage($uri[0]) == 2 ? 2 : 0)?>
+    <?=showMenu('sort', 'main-menu main-menu--header', 'main-menu__item', isAdmin($_SESSION['id_user']))?>
   </nav>
 </header>
 

@@ -14,7 +14,7 @@
  * @return array данные о товарах
  */
 
-function showProducts($catalog_id, $new, $sale, $sort, $ascDesc, $priceBegin, $priceEnd, $page) 
+function showProducts($catalog_id, $new, $sale, $sort, $order, $priceBegin, $priceEnd, $page) 
 {
   
   $catalog_select = $catalog_id != 1 ? " `catalog_product`.`catalog_id` = " . $catalog_id . " AND " : "";
@@ -32,7 +32,7 @@ function showProducts($catalog_id, $new, $sale, $sort, $ascDesc, $priceBegin, $p
           LEFT JOIN `images` ON `products`.`id` = `images`.`id_product` " .
           $catalog_join
           . " WHERE " . $catalog_select . $new_select . $sale_select . $min_price_select . $max_price_select
-          . " `products`.`id` > 0 ORDER BY `" . $sort . "` " . $ascDesc;
+          . " `products`.`id` > 0 ORDER BY `" . $sort . "` " . $order;
 
   $res_count = mysqli_query(connect(), $sql);
 

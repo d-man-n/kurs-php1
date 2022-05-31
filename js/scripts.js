@@ -444,9 +444,9 @@ if (document.querySelector('#catalog_filter')) {
     const newSale = document.querySelector('#sale').checked ? 1 : 0;
     const newNews = document.querySelector('#new').checked ? 1 : 0;
     const sort = document.querySelector('#sort').value == 0 ? 'price' : document.querySelector('#sort').value;
-    const ascdesc = document.querySelector('#ascdesc').value == 0 ? 'asc' : document.querySelector('#ascdesc').value;
+    const order = document.querySelector('#order').value == 0 ? 'asc' : document.querySelector('#order').value;
   
-    document.location.href = "?min_price=" + newMinPrice + "&max_price=" + newMaxPrice + "&new=" + newNews + "&sale=" + newSale + "&sort=" + sort + "&ascdesc=" + ascdesc;
+    document.location.href = "?min_price=" + newMinPrice + "&max_price=" + newMaxPrice + "&new=" + newNews + "&sale=" + newSale + "&sort=" + sort + "&order=" + order;
   })
 }
 
@@ -457,21 +457,21 @@ if (document.querySelector('#sort')) {
     const newSale = document.querySelector('#sale').checked ? 1 : 0;
     const newNews = document.querySelector('#new').checked ? 1 : 0;
     const sort = document.querySelector('#sort').value == 0 ? 'price' : document.querySelector('#sort').value;
-    const ascdesc = document.querySelector('#ascdesc').value == 0 ? 'asc' : document.querySelector('#ascdesc').value;
+    const order = document.querySelector('#order').value == 0 ? 'asc' : document.querySelector('#order').value;
   
-    document.location.href = "?min_price=" + newMinPrice + "&max_price=" + newMaxPrice + "&new=" + newNews + "&sale=" + newSale + "&sort=" + sort + "&ascdesc=" + ascdesc;
+    document.location.href = "?min_price=" + newMinPrice + "&max_price=" + newMaxPrice + "&new=" + newNews + "&sale=" + newSale + "&sort=" + sort + "&order=" + order;
   })
 }
 
-if (document.querySelector('#ascdesc')) {
-  document.querySelector('#ascdesc').addEventListener('change', () => {
+if (document.querySelector('#order')) {
+  document.querySelector('#order').addEventListener('change', () => {
     const newMinPrice = +/\d+/.exec(document.querySelector('.min-price').textContent.replace(/\s/g, ''));
     const newMaxPrice = +/\d+/.exec(document.querySelector('.max-price').textContent.replace(/\s/g, ''));
     const newSale = document.querySelector('#sale').checked ? 1 : 0;
     const newNews = document.querySelector('#new').checked ? 1 : 0;
     const sort = document.querySelector('#sort').value == 0 ? 'price' : document.querySelector('#sort').value;
-    const ascdesc = document.querySelector('#ascdesc').value == 0 ? 'asc' : document.querySelector('#ascdesc').value;
+    const order = document.querySelector('#order').value == 0 ? 'asc' : document.querySelector('#order').value;
   
-    document.location.href = "?min_price=" + newMinPrice + "&max_price=" + newMaxPrice + "&new=" + newNews + "&sale=" + newSale + "&sort=" + sort + "&ascdesc=" + ascdesc;
+    document.location.href = "?min_price=" + newMinPrice + "&max_price=" + newMaxPrice + "&new=" + newNews + "&sale=" + newSale + "&sort=" + sort + "&order=" + order;
   })
 }

@@ -2,16 +2,16 @@
 
 $catalog_id = getCatalogIdByAlias(isset($uri[1]) && $uri[1] != "sale" && $uri[1] != "new" ? $uri[1] : "all");
 $new = (isset($uri[1]) && $uri[1] == "new") || (isset($_GET['new']) && $_GET['new'] == 1) ? 1 : 0;
-$sale = (isset($uri[1]) && $uri[1] == "sale") || (isset($_GET['sale']) && $_GET['sale'] == 1) ? 1 : 0;;
+$sale = (isset($uri[1]) && $uri[1] == "sale") || (isset($_GET['sale']) && $_GET['sale'] == 1) ? 1 : 0;
 $sort = isset($_GET['sort']) ? $_GET['sort'] : "price";
-$ascDesc = isset($_GET['ascdesc']) ? $_GET['ascdesc'] : "asc";
-$priceBegin = isset($_GET['min_price']) ? $_GET['min_price'] : getMinMaxPrice($catalog_id, $new, $sale)['min_price'];
-$priceEnd = isset($_GET['max_price']) ? $_GET['max_price'] : getMinMaxPrice($catalog_id, $new, $sale)['max_price'];
+$order = isset($_GET['order']) ? $_GET['order'] : "asc";
+$priceBegin = isset($_GET['min_price']) && $_GET['min_price'] > getMinMaxPrice($catalog_id, $new, $sale)['min_price'] ? $_GET['min_price'] : getMinMaxPrice($catalog_id, $new, $sale)['min_price'];
+$priceEnd = isset($_GET['max_price']) && $_GET['max_price'] < getMinMaxPrice($catalog_id, $new, $sale)['max_price'] ? $_GET['max_price'] : getMinMaxPrice($catalog_id, $new, $sale)['max_price'];
 $oldPriceBegin = getMinMaxPrice($catalog_id, $new, $sale)['min_price'];
 $oldPriceEnd = getMinMaxPrice($catalog_id, $new, $sale)['max_price'];
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 
-$products = showProducts($catalog_id, $new, $sale, $sort, $ascDesc, $priceBegin, $priceEnd, $page);
+$products = showProducts($catalog_id, $new, $sale, $sort, $order, $priceBegin, $priceEnd, $page);
 ?>
 
 <main class="shop-page">
@@ -41,9 +41,9 @@ $products = showProducts($catalog_id, $new, $sale, $sort, $ascDesc, $priceBegin,
         </div>
 
         <fieldset class="custom-form__group">
-          <input type="checkbox" name="new" id="new" class="custom-form__checkbox" <?=isset($_GET['new']) && $_GET['new'] == 1 ? "checked" : ""?>>
+          <input type="checkbox" name="new" id="new" class="custom-form__checkbox" <?=(isset($_GET['new']) && $_GET['new'] == 1) || (isset($uri[1]) && $uri[1] == "new") ? "checked" : ""?>>
           <label for="new" class="custom-form__checkbox-label custom-form__info" style="display: block;">Новинка</label>
-          <input type="checkbox" name="sale" id="sale" class="custom-form__checkbox" <?=isset($_GET['sale']) && $_GET['sale'] == 1 ? "checked" : ""?>>
+          <input type="checkbox" name="sale" id="sale" class="custom-form__checkbox" <?=(isset($_GET['sale']) && $_GET['sale'] == 1) || (isset($uri[1]) && $uri[1] == "sale") ? "checked" : ""?>>
           <label for="sale" class="custom-form__checkbox-label custom-form__info" style="display: block;">Распродажа</label>
         </fieldset>
         <button class="button" type="submit" style="width: 100%">Применить</button>
@@ -60,10 +60,10 @@ $products = showProducts($catalog_id, $new, $sale, $sort, $ascDesc, $priceBegin,
           </select>
         </div>
         <div class="shop__sorting-item custom-form__select-wrapper">
-          <select class="custom-form__select" name="ascdesc" id="ascdesc">
+          <select class="custom-form__select" name="order" id="order">
             <option value="0" hidden="">Порядок</option>
-            <option value="asc" <?=isset($_GET['ascdesc']) && $_GET['ascdesc'] == 'asc' ? 'SELECTED' : ''?>>По возрастанию</option>
-            <option value="desc" <?=isset($_GET['ascdesc']) && $_GET['ascdesc'] == 'desc' ? 'SELECTED' : ''?>>По убыванию</option>
+            <option value="asc" <?=isset($_GET['order']) && $_GET['order'] == 'asc' ? 'SELECTED' : ''?>>По возрастанию</option>
+            <option value="desc" <?=isset($_GET['order']) && $_GET['order'] == 'desc' ? 'SELECTED' : ''?>>По убыванию</option>
           </select>
         </div>
         <p class="shop__sorting-res">Найдено <span class="res-sort"><?=$products[1]?></span> моделей</p>

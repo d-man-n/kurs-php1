@@ -22,7 +22,7 @@ function getOrders()
                 FROM `orders` 
                 LEFT JOIN `order_pay` ON `order_pay`.`id` = `orders`.`pay` 
                 LEFT JOIN `delivery_order` ON `delivery_order`.`id` = `orders`.`delivery`
-                ORDER BY `status`, `orders`.`cdate`";
+                ORDER BY `status`, `orders`.`cdate` DESC";
 
     $res = mysqli_query(connect(), $sql);
     $lines = [];

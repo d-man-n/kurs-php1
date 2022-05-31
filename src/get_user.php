@@ -18,19 +18,19 @@ function getUser($username)
     return mysqli_fetch_assoc($res);
 }
 
-/**
- * Получить данные об уровне доступа для страницы (0 - отображать пункт меню пользователям 1 - отображать везде, 2 - отображать в админке)
- * 
- * @param string часть url страницы
- * @return integer уровень доступа
- */
+// /**
+//  * Получить данные об уровне доступа для страницы (0 - отображать пункт меню пользователям 1 - отображать везде, 2 - отображать в админке)
+//  * 
+//  * @param string часть url страницы
+//  * @return integer уровень доступа
+//  */
 
-function adminPage($path) 
-{
-    $path = mysqli_real_escape_string(connect(), $path);
-    $res = mysqli_query(connect(), "SELECT admin FROM `menu` WHERE path LIKE '%" . $path . "%'");
-    return mysqli_fetch_assoc($res)['admin'];
-}
+// function adminPage($path) 
+// {
+//     $path = mysqli_real_escape_string(connect(), $path);
+//     $res = mysqli_query(connect(), "SELECT admin FROM `menu` WHERE path LIKE '%" . $path . "%'");
+//     return mysqli_fetch_assoc($res)['admin'];
+// } 
 
  /**
  * Получить список групп для текущего пользователя

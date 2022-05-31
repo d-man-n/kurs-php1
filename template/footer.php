@@ -4,7 +4,7 @@
       <img src="/img/logo--footer.svg" alt="Fashion">
     </a>
     <nav class="page-footer__menu">
-        <?=showMenu('sort', 'main-menu main-menu--footer', 'main-menu__item', 0)?>
+        <?=showMenu('sort', 'main-menu main-menu--footer', 'main-menu__item', array())?>
     </nav>
     <address class="page-footer__copyright">
       © Все права защищены
