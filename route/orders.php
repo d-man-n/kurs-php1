@@ -1,7 +1,11 @@
 <?php
 
-if (!in_array("Администраторы", isAdmin($_SESSION['id_user'])) && !in_array("Операторы", isAdmin($_SESSION['id_user']))) {
-  header("Location: /noauth/");
+if (
+    !in_array("Администраторы", isAdmin($_SESSION['id_user'])) && 
+    !in_array("Операторы", isAdmin($_SESSION['id_user']))
+) {
+    header("Location: /noauth/");
+    die();
 }
 
 $orders = getOrders();
@@ -62,7 +66,7 @@ $orders = getOrders();
         </div>
       </li>
 
-    <?php endforeach; ?>
+    <?php endforeach ?>
 
   </ul>
 </main>

@@ -28,7 +28,7 @@ function getOrders()
     $lines = [];
 
     while($row = mysqli_fetch_assoc($res)) {
-      $lines[] = $row;
+        $lines[] = $row;
     }
 
     return $lines;

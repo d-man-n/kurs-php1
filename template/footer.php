@@ -15,10 +15,10 @@
 <?php if (isset($priceBegin) || isset($priceEnd) || isset($oldPriceBegin) || isset($oldPriceEnd)): ?>
 
   <script>
-    minPrice = <?=isset($priceBegin) ? $priceBegin : ""?>;
-    maxPrice = <?=isset($priceEnd) ? $priceEnd : ""?>;
-    oldMinPrice = <?=isset($oldPriceBegin) ? $oldPriceBegin : ""?>;
-    oldMaxPrice = <?=isset($oldPriceEnd) ? $oldPriceEnd : ""?>;
+    minPrice = <?=$priceBegin ?? ""?>;
+    maxPrice = <?=$priceEnd ?? ""?>;
+    oldMinPrice = <?=$oldPriceBegin ?? ""?>;
+    oldMaxPrice = <?=$oldPriceEnd ?? ""?>;
   </script>
   
 <?php endif; ?>  

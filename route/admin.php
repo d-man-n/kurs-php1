@@ -3,31 +3,34 @@
 if (isset($uri[1]) && $uri[1] == 'exit') {
     session_destroy();
     header("Location: /");
-} else if ($_SESSION['id_user'] == 0) {
-    if (isset($_POST['login_ok'])){
+    die();
+} elseif ($_SESSION['id_user'] == 0) {
+    if (isset($_POST['login_ok'])) {
         $user = getUser($_POST['login']);
         if ($user && $user['password'] == md5($_POST['password'])) {
             $_SESSION['id_user'] = $user['id'];
             $_SESSION['name'] = $user['name'];
             if (in_array("Администраторы", isAdmin($_SESSION['id_user']))) {
                 $location = "/products/";
-              } else if (in_array("Операторы", isAdmin($_SESSION['id_user']))) {
+            } elseif (in_array("Операторы", isAdmin($_SESSION['id_user']))) {
                 $location = "/orders/";
-              } else {
+            } else {
                 $location = "/";
-              }
+            }
             header("Location: " . $location);
+            die();
         }
     }
 } else {
     if (in_array("Администраторы", isAdmin($_SESSION['id_user']))) {
         $location = "/products/";
-      } else if (in_array("Операторы", isAdmin($_SESSION['id_user']))) {
+    } elseif (in_array("Операторы", isAdmin($_SESSION['id_user']))) {
         $location = "/orders/";
-      } else {
+    } else {
         $location = "/";
-      }
+    }
     header("Location: " . $location);
+    die();
 }
 
 ?>

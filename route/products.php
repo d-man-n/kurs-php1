@@ -1,22 +1,23 @@
 <?php
 
 if (!in_array("Администраторы", isAdmin($_SESSION['id_user']))) {
-  header("Location: /noauth/");
+    header("Location: /noauth/");
+    die();
 }
 
 
 if (isset($_POST['add-product'])) {
-  addProduct($_POST);
+    addProduct($_POST);
 } else {
-  $products = getProducts();
+    $products = getProducts();
 }
 
 if (isset($uri[1]) && $uri[1] == 'add'): 
 
-  if (isset($uri[2]) && $uri[2] > 0) {
-    $product = getProductById($uri[2]);
-    $catalog = getCatalogByProductId($uri[2]);
-  }
+    if (isset($uri[2]) && $uri[2] > 0) {
+        $product = getProductById($uri[2]);
+        $catalog = getCatalogByProductId($uri[2]);
+    }
 
 ?>
 
@@ -25,7 +26,7 @@ if (isset($uri[1]) && $uri[1] == 'add'):
     <form class="custom-form" id="addForm" method="post" enctype="multipart/form-data">
       <?php if (isset($product)): ?>
         <input type="hidden" name="product-id" id="product-id" value="<?=$uri[2]?>">
-      <?php endif; ?>
+      <?php endif ?>
       <fieldset class="page-add__group custom-form__group">
         <legend class="page-add__small-title custom-form__title">Данные о товаре</legend>
         <label for="product-name" class="custom-form__input-wrapper page-add__first-wrapper">
@@ -44,7 +45,7 @@ if (isset($uri[1]) && $uri[1] == 'add'):
           </li>
           <?php if (isset($product) && $product['image'] != ""): ?> 
             <li class="add-list__item add-list__item--active"><img src="<?=insert_base64_encoded_image_src($product['image'])?>"></li>
-          <?php endif; ?>
+          <?php endif ?>
         </ul>
       </fieldset>
       <fieldset class="page-add__group custom-form__group">
@@ -77,15 +78,13 @@ if (isset($uri[1]) && $uri[1] == 'add'):
       const imgContainer = document.querySelector('.add-list__item--active');
       const addList1 = document.querySelector('.add-list');
       const addButton = addList1.querySelector('.add-list__item--add');
-      // const addInput = addList1.querySelector('#product-photo');
 
       imgContainer.addEventListener('click', evt => {
         addList1.removeChild(evt.target);
-        // addInput.value = '';
         checkList(addList1, addButton);
       });
     </script>
-  <?php endif; ?>
+  <?php endif ?>
 
 <?php else: ?>
   <main class="page-products">
@@ -100,7 +99,7 @@ if (isset($uri[1]) && $uri[1] == 'add'):
     </div>
     <ul class="page-products__list">
 
-      <?php foreach($products as $product): ?>
+      <?php foreach ($products as $product): ?>
 
         <li class="product-item page-products__item" id="<?=$product['id']?>">
           <b class="product-item__name"><?=$product['name']?></b>
@@ -112,8 +111,8 @@ if (isset($uri[1]) && $uri[1] == 'add'):
           <button class="product-item__delete"></button>
         </li>
 
-      <?php endforeach; ?>
+      <?php endforeach ?>
 
     </ul>
   </main>
-<?php endif; ?>
+<?php endif ?>

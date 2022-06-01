@@ -1,9 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['id_user'])) {
-  $_SESSION['id_user'] = 0;
-}
+$_SESSION['id_user'] = $_SESSION['id_user'] ?? 0;
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/src/core.php');
 
@@ -41,6 +39,3 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/src/core.php');
     <?=showMenu('sort', 'main-menu main-menu--header', 'main-menu__item', isAdmin($_SESSION['id_user']))?>
   </nav>
 </header>
-
-        
- 

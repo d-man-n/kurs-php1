@@ -67,4 +67,3 @@ if (isset($_POST['product-id']) && $_POST['product-id'] > 0) {
         echo "error";
     }
 }
-

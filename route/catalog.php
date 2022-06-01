@@ -3,13 +3,13 @@
 $catalog_id = getCatalogIdByAlias(isset($uri[1]) && $uri[1] != "sale" && $uri[1] != "new" ? $uri[1] : "all");
 $new = (isset($uri[1]) && $uri[1] == "new") || (isset($_GET['new']) && $_GET['new'] == 1) ? 1 : 0;
 $sale = (isset($uri[1]) && $uri[1] == "sale") || (isset($_GET['sale']) && $_GET['sale'] == 1) ? 1 : 0;
-$sort = isset($_GET['sort']) ? $_GET['sort'] : "price";
-$order = isset($_GET['order']) ? $_GET['order'] : "asc";
+$sort = $_GET['sort'] ?? "price";
+$order = $_GET['order'] ?? "asc";
 $priceBegin = isset($_GET['min_price']) && $_GET['min_price'] > getMinMaxPrice($catalog_id, $new, $sale)['min_price'] ? $_GET['min_price'] : getMinMaxPrice($catalog_id, $new, $sale)['min_price'];
 $priceEnd = isset($_GET['max_price']) && $_GET['max_price'] < getMinMaxPrice($catalog_id, $new, $sale)['max_price'] ? $_GET['max_price'] : getMinMaxPrice($catalog_id, $new, $sale)['max_price'];
 $oldPriceBegin = getMinMaxPrice($catalog_id, $new, $sale)['min_price'];
 $oldPriceEnd = getMinMaxPrice($catalog_id, $new, $sale)['max_price'];
-$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$page = $_GET['page'] ?? 1;
 
 $products = showProducts($catalog_id, $new, $sale, $sort, $order, $priceBegin, $priceEnd, $page);
 ?>
@@ -55,15 +55,15 @@ $products = showProducts($catalog_id, $new, $sale, $sort, $order, $priceBegin, $
         <div class="shop__sorting-item custom-form__select-wrapper">
           <select class="custom-form__select" name="sort" id="sort">
             <option value="0" hidden="">Сортировка</option>
-            <option value="price" <?=isset($_GET['sort']) && $_GET['sort'] == 'price' ? 'SELECTED' : ''?>>По цене</option>
-            <option value="name" <?=isset($_GET['sort']) && $_GET['sort'] == 'name' ? 'SELECTED' : ''?>>По названию</option>
+            <option value="price" <?=isset($_GET['sort']) && $_GET['sort'] == 'price' ? 'selected' : ''?>>По цене</option>
+            <option value="name" <?=isset($_GET['sort']) && $_GET['sort'] == 'name' ? 'selected' : ''?>>По названию</option>
           </select>
         </div>
         <div class="shop__sorting-item custom-form__select-wrapper">
           <select class="custom-form__select" name="order" id="order">
             <option value="0" hidden="">Порядок</option>
-            <option value="asc" <?=isset($_GET['order']) && $_GET['order'] == 'asc' ? 'SELECTED' : ''?>>По возрастанию</option>
-            <option value="desc" <?=isset($_GET['order']) && $_GET['order'] == 'desc' ? 'SELECTED' : ''?>>По убыванию</option>
+            <option value="asc" <?=isset($_GET['order']) && $_GET['order'] == 'asc' ? 'selected' : ''?>>По возрастанию</option>
+            <option value="desc" <?=isset($_GET['order']) && $_GET['order'] == 'desc' ? 'selected' : ''?>>По убыванию</option>
           </select>
         </div>
         <p class="shop__sorting-res">Найдено <span class="res-sort"><?=$products[1]?></span> моделей</p>
@@ -80,17 +80,17 @@ $products = showProducts($catalog_id, $new, $sale, $sort, $order, $priceBegin, $
             <span class="product__price"><?=number_format($products[0][$i]['price'], 0, '.', ' ')?> руб.</span>
           </article>
 
-        <?php endfor; ?>
+        <?php endfor ?>
 
       </section>
       <ul class="shop__paginator paginator">
         <?php 
-          for ($i = 1; $i <= ceil($products[1]/6); $i++): 
+          for ($i = 1; $i <= ceil($products[1] / 6); $i++): 
         ?>
           <li>
             <a class="paginator__item" <?=$page != $i ? 'href=' . explode("?", $_SERVER["REQUEST_URI"])[0] . '?page=' . $i . (isset($_GET['page']) || $_SERVER['QUERY_STRING'] == '' ? '' : '&') . preg_replace("/page=[0-9]+/", "", $_SERVER['QUERY_STRING']) : ''?>><?=$i?></a>
           </li>
-        <?php endfor; ?>
+        <?php endfor ?>
       </ul>
     </div>
   </section>

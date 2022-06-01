@@ -71,7 +71,8 @@ function getProducts()
         while ($row_catalog = mysqli_fetch_assoc($res_catalog)) {
             $lines_catalog[] = $row_catalog['name'];
         }
-        $row_product += array("catalog" => $lines_catalog);
+
+        $row_product["catalog"] = $lines_catalog;
         $lines_product[] = $row_product;
     }
 
