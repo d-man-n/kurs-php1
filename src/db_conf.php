@@ -11,11 +11,7 @@ function connect()
     static $connection = null;
 
     if (null === $connection) {
-        $dbHost = 'localhost';
-        $dbUser = 'root';
-        $dbPass = '';
-        $dbName = 'php1';
-        $connection = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName) or die('connection Error');
+        $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME) or die('connection Error');
         $connection->set_charset("utf8");
     }
 

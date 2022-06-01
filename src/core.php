@@ -1,4 +1,5 @@
 <?php
+include $_SERVER['DOCUMENT_ROOT'] . '/conf.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/src/db_conf.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/src/get_user.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/src/show_menu.php';
